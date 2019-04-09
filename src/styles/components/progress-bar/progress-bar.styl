@@ -16,7 +16,6 @@
     margin: 0 2em
     order: 2
     
-
     .progress-bar{
       position: relative
       height: 2em
@@ -33,7 +32,6 @@
         border-radius: 2em
         z-index: 1
       }
-      
     }
     .progress-bar-text{
       position: relative
@@ -42,18 +40,19 @@
       width: 100%
       margin-top: 2em
       color: #00dcb3
+
       p{
         font-size: 2em
       }
     }
-    
   }
 
   button{
     position: relative
     width: 3em
     height: 3em
-    border-radius: 50%
+    border-radius: 3em
+    color: #666
     border: none 
     background: #DDD 
 
@@ -64,9 +63,16 @@
     &.decrement{
       order: 1
     }
+
     &.increment{
       order: 3
     }
-  }
 
+    &.update{
+      order: 4
+      width: auto
+      padding: 0em 2em
+      margin-left: 2em
+    }
+  }
 }

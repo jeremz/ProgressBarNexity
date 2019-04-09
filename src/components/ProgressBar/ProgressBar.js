@@ -1,35 +1,45 @@
 import React, { Component } from 'react'
+import updateRequest from './UpdateRequest'
 
 export default class ProgressBar extends Component {
   constructor(props) {
     super(props)
 
     this.state = { 
-      progressBarValue: 50
+      progressBarValue: 0,
+      buttonValue: 1
     }
   }
-  componentDidMount(){
 
+  //Update function
+  updateProgressBar = () => {
+    updateRequest()
+    .then(
+      data => this.setState({
+        progressBarValue : data.progress
+      })
+    ).catch(error => console.log(error))
   }
 
+  //increment function
+  increment = () => {
+    if(this.state.progressBarValue < 100){
+      this.setState((prevState) => ({
+        progressBarValue: prevState.progressBarValue + this.state.buttonValue
+      }))
+    }
+  }
+
+  //decrement function
+  decrement = () => {
+    if(this.state.progressBarValue > 0){
+      this.setState((prevState) => ({
+        progressBarValue: prevState.progressBarValue - this.state.buttonValue
+      }))
+    }
+  }
+  
   render () {
-    //increment function
-    this.increment = (value) => {
-      if(this.state.progressBarValue < 100){
-        this.setState((prevState) => ({
-          progressBarValue: prevState.progressBarValue + value
-        }))
-      }
-    }
-    //decrement function
-    this.decrement = (value) => {
-      if(this.state.progressBarValue > 0){
-        this.setState((prevState) => ({
-          progressBarValue: prevState.progressBarValue - value
-        }))
-      }
-    }
-
     return (
       <div className='progress-bar-wrapper'>
         <div className='progress-bar-content' >
@@ -42,8 +52,9 @@ export default class ProgressBar extends Component {
             <p>{this.state.progressBarValue} %</p>
           </div>
         </div>
-        <button className='increment' onClick={ () => this.increment(1) }><p>+</p></button>
-        <button className='decrement' onClick={ () => this.decrement(1) }><p>-</p></button>
+        <button className='increment' onClick={ this.increment }><p>+</p></button>
+        <button className='decrement' onClick={ this.decrement }><p>-</p></button>
+        <button className='update' onClick={ this.updateProgressBar }><p>UPDATE</p></button>
       </div>
     )
   }
