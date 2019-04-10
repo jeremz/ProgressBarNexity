@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import updateRequest from './UpdateRequest'
 
 export default class ProgressBar extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.state = { 
       progressBarValue: 0,
@@ -23,33 +23,37 @@ export default class ProgressBar extends Component {
 
   //increment function
   increment = () => {
-    if(this.state.progressBarValue < 100){
+    if (this.state.progressBarValue < 100) {
       this.setState((prevState) => ({
         progressBarValue: prevState.progressBarValue + this.state.buttonValue
       }))
+    } else {
+      this.setState({ progressBarValue: 100 })
     }
   }
 
   //decrement function
   decrement = () => {
-    if(this.state.progressBarValue > 0){
+    if (this.state.progressBarValue > 0) {
       this.setState((prevState) => ({
         progressBarValue: prevState.progressBarValue - this.state.buttonValue
       }))
+    } else {
+      this.setState({ progressBarValue: 0 })
     }
   }
-  
+
   render () {
     return (
       <div className='progress-bar-wrapper'>
         <div className='progress-bar-content' >
           <div className='progress-bar'> 
             <div className='progress-bar-fill' style={{
-              width: `${this.state.progressBarValue}%`
+              width: `${ this.state.progressBarValue }%`
             }} />
           </div>
           <div className='progress-bar-text'>
-            <p>{this.state.progressBarValue} %</p>
+            <p>{ this.state.progressBarValue } %</p>
           </div>
         </div>
         <button className='increment' onClick={ this.increment }><p>+</p></button>
